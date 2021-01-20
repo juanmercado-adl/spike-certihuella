@@ -1,11 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  lambdajavalabfunction:
+  lambdaClientValidation:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda.java.lab.controller.LambdaController
       Runtime: java11
-      CodeUri: './code/'
+      CodeUri: './projects/lambda-client-validation'
+      MemorySize: 512
+      Timeout: 30
+  lambdaProcessFile:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda.java.lab.controller.LambdaController
+      Runtime: java11
+      CodeUri: './projects/lambda-process-file'
       MemorySize: 512
       Timeout: 30

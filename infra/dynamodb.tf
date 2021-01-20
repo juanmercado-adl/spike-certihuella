@@ -1,18 +1,18 @@
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "dynamodb-table"
+  name           = "lambda-java-lab"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
-  hash_key       = "isbn"
-  range_key      = "name"
+  hash_key       = "lambda-java-lab-id"
+  range_key      = "lambda-name"
 
   attribute {
-    name = "isbn"
+    name = "lambda-java-lab-id"
     type = "S"
   }
 
   attribute {
-    name = "name"
+    name = "lambda-name"
     type = "S"
   }
 
@@ -27,9 +27,9 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   global_secondary_index {
-    name               = "nameIndex"
-    hash_key           = "name"
-    range_key          = "description"
+    name               = "ambda-nameIndex"
+    hash_key           = "lambda-java-lab-id"
+    range_key          = "lambda-name"
     write_capacity     = 10
     read_capacity      = 10
     projection_type    = "INCLUDE"
@@ -37,7 +37,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   tags = {
-    Name        = "dynamodb-table"
+    Name        = "lambda-java-lab"
     Environment = "production"
   }
 }
