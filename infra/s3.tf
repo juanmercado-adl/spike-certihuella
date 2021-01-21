@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "s3_bucket_certihuella" {
+/*resource "aws_s3_bucket" "s3_bucket_certihuella" {
   bucket = "${var.stack_id}-certihuella"
   acl    = "private"
 
@@ -10,12 +10,12 @@ resource "aws_s3_bucket" "s3_bucket_certihuella" {
     }
   }
 
-/*
+
   tags = merge(
     local.common_tags,
     {
       "Name"        = "${var.stack_id}-certihuella"
       "Environment" = var.stack_id
     },
-  )*/
-}
+  )
+}*/
