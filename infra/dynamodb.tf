@@ -16,18 +16,13 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     type = "S"
   }
 
-  attribute {
-    name = "description"
-    type = "S"
-  }
-
   ttl {
     attribute_name = "TimeToExist"
     enabled        = false
   }
 
   global_secondary_index {
-    name               = "ambda-nameIndex"
+    name               = "lambda-nameIndex"
     hash_key           = "lambda-java-lab-id"
     range_key          = "lambda-name"
     write_capacity     = 10
