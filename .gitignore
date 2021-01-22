@@ -23,7 +23,8 @@ pids
 
 **/.terraform
 **/.terraform.*
-terraform.tfstate
+**/terraform.tfstate.backup
+
 
 # Package Files #
 *.jar
