@@ -27,8 +27,9 @@ public class LambdaController implements RequestHandler<Object, String> {
     bootInjector(new LambdaConfig(), new ComponentsConfig(), new AwsSdkConfig());
     LOGGER.info("Input: {}", this.getGsonBuilder().toJson(input));
     this.service = injectLambdaService();
-    this.service.save(
-        this.getGsonBuilder().fromJson(this.getGsonBuilder().toJson(input), LambdaModel.class));
+    this.service.getAll();
+    /*this.service.save(
+        this.getGsonBuilder().fromJson(this.getGsonBuilder().toJson(input), LambdaModel.class));*/
     LOGGER.info("End consumer LambdaController");
     return null;
   }

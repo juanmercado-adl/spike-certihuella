@@ -19,3 +19,6 @@
     },
   )
 }*/
+// creacion manual bucket s3 para lambda
+//aws s3api create-bucket --bucket=mybucketjava --region=us-east-1
+//aws s3 cp .\build\distributions\lambda-client-validation-1.15-SNAPSHOT.zip s3://mybucketjava/lambda-client-validation-1.15-SNAPSHOT.zip

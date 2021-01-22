@@ -19,4 +19,13 @@ public class LambdaServiceImpl implements ILambdaService{
         LOGGER.info("Start end() LambdaServiceImpl: {}", content);
         return content;
     }
+
+    @Override
+    public String getAll() {
+        LOGGER.info("Start getAll() LambdaServiceImpl");
+        final String content = lambdaDynamoDbRepository.getAll();
+        LOGGER.info("Start end() LambdaServiceImpl: {}", content);
+        return content;
+    }
+
 }
