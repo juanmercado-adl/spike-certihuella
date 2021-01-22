@@ -1,0 +1,38 @@
+{
+    "Records": [
+        {
+            "eventVersion": "2.1",
+            "eventSource": "aws:s3",
+            "awsRegion": "us-east-1",
+            "eventTime": "2021-01-22T16:04:16.866Z",
+            "eventName": "ObjectCreated:Put",
+            "userIdentity": {
+                "principalId": "AWS:AIDARERJZKMN6RMBUL2GN"
+            },
+            "requestParameters": {
+                "sourceIPAddress": "181.131.132.156"
+            },
+            "responseElements": {
+                "x-amz-request-id": "6A222640412489A2",
+                "x-amz-id-2": "mEs9aq3BBvVc1JG1LHacyqhCeUsBa5JoIybyJQkDTpnDWvX6WmZzWpwW8RAkhL6LsNm2cT7Y4f4XKv0L0u1xgsxmx/+0GbE4"
+            },
+            "s3": {
+                "s3SchemaVersion": "1.0",
+                "configurationId": "tf-s3-lambda-20210122160305504200000002",
+                "bucket": {
+                    "name": "vikingos-example-process-file-repo-certihuella",
+                    "ownerIdentity": {
+                        "principalId": "A3VEDUK0O4NCPU"
+                    },
+                    "arn": "arn:aws:s3:::vikingos-example-process-file-repo-certihuella"
+                },
+                "object": {
+                    "key": "files/test.txt",
+                    "size": 5,
+                    "eTag": "ea9ab4344cab35eebb2d8d06e89b71ff",
+                    "sequencer": "00600AF7843530CF28"
+                }
+            }
+        }
+    ]
+}

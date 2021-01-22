@@ -1,5 +1,5 @@
-/*resource "aws_s3_bucket" "s3_bucket_certihuella" {
-  bucket = "${var.stack_id}-certihuella"
+resource "aws_s3_bucket" "s3_bucket_certihuella" {
+  bucket = "${var.bucket_name}-certihuella"
   acl    = "private"
 
   server_side_encryption_configuration {
@@ -11,11 +11,16 @@
   }
 
 
-  tags = merge(
+  /*tags = merge(
     local.common_tags,
     {
       "Name"        = "${var.stack_id}-certihuella"
       "Environment" = var.stack_id
     },
-  )
-}*/
+  )*/
+}
+
+resource "aws_s3_bucket_object" "files" {
+ bucket = aws_s3_bucket.s3_bucket_certihuella.id
+ key    = "files/"
+}
