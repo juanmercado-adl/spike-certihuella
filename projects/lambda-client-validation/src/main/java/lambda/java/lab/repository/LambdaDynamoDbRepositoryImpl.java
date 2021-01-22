@@ -28,4 +28,14 @@ public class LambdaDynamoDbRepositoryImpl implements ILambdaDynamoDbRepository {
     LOGGER.info("End save() LambdaDynamoDbRepositoryImpl: {} ", outcome);
     return "Test Java Lambda";
   }
+
+  @Override
+  public String getAll() {
+    LOGGER.info("Start getAll() LambdaDynamoDbRepositoryImpl");
+    Table table = dynamoDB.getTable(DYNAMO_DB_TABLE_NAME);
+    // TODO: get register from table
+    return "Tabla: " + table.getTableName();
+  }
+
+
 }
