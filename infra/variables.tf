@@ -23,6 +23,10 @@ variable "s3_bucket" {
 }
 
 variable "aws_account_id"{
-	default = "vikingos-accounts"
+	default = "078470796059"
+}
+
+variable "dynamodb_table_name"{
+    default = "lambda-java-lab"
 }
 

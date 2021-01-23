@@ -11,8 +11,55 @@ resource "aws_iam_role" "role_lambda_client_validation" {
   assume_role_policy = file("assume_role_policy.json")
 }
 
-resource "aws_iam_role_policy" "policy_lambda_process_file" {
- name = "policy_lambda_process_file"
+resource "aws_iam_role_policy" "policy_dynamodb_lambda_process_file" {
+ name = "policy_dynamodb_lambda_process_file"
+ role = aws_iam_role.role_lambda_process_file.id
+ 
+policy = <<-EOF
+{
+   "Version": "2012-10-17",
+   "Statement": [
+        {
+           "Effect": "Allow",
+           "Action": [
+               "dynamodb:BatchGetItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem"
+           ],
+           "Resource": "arn:aws:dynamodb:*:*:table/${var.dynamodb_table_name}"           
+       },
+       {
+            "Sid": "GetStreamRecords",
+            "Effect": "Allow",
+            "Action": "dynamodb:GetRecords",
+            "Resource": "arn:aws:dynamodb:*:*:table/SampleTable/stream/* "
+        },
+        {
+            "Sid": "WriteLogStreamsAndGroups",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateLogGroup",
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+        }
+   ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "policy_s3_lambda_process_file" {
+ name = "policy_s3_lambda_process_file"
  role = aws_iam_role.role_lambda_process_file.id
  
 policy = <<-EOF
