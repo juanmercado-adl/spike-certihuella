@@ -50,3 +50,7 @@ echo '{"lambdaName": "value1" }' | sam local invoke "lambdaProcessFile" --event 
 
 
 sam local invoke "lambdaProcessFile" --event test/s3-event.json --debug --profile "default"
+
+#subir ejeuctable client validation
+aws s3 cp .\build\distributions\lambda-client-validation-1.15-SNAPSHOT.zip s3://vikingos-validate-client-repo/lambda-client-validation-1.15-SNAPSHOT.zip
+```

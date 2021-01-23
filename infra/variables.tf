@@ -19,5 +19,10 @@ variable "s3_key" {
 }
 
 variable "s3_bucket" {
-    default = "mybucketjava"
+    default = "vikingos-validate-client-repo"
 }
+
+variable "aws_account_id"{
+	default = "vikingos-accounts"
+}
+
