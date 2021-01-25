@@ -11,7 +11,7 @@
        "dynamodb:PutItem",
        "dynamodb:UpdateItem"
       ],
-      "Resource": "arn:aws:dynamodb:us-east-1:488660647113:table/lambda-java-lab"
+      "Resource": "arn:aws:dynamodb:us-east-1:078470796059:table/lambda-java-lab"
      }
     ]
   }

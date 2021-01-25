@@ -1,3 +1,11 @@
+variable "region" {
+ default = "us-east-1"
+}
+
+variable "bucket_name" {
+ default = "vikingos-process-file-repo"
+}
+
 variable "lambda_runtime" {
     default = "java8"
 }
@@ -11,5 +19,14 @@ variable "s3_key" {
 }
 
 variable "s3_bucket" {
-    default = "mybucketjava"
+    default = "vikingos-validate-client-repo"
 }
+
+variable "aws_account_id"{
+	default = "078470796059"
+}
+
+variable "dynamodb_table_name"{
+    default = "lambda-java-lab"
+}
+

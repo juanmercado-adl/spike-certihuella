@@ -1,5 +1,5 @@
-/*resource "aws_s3_bucket" "s3_bucket_certihuella" {
-  bucket = "${var.stack_id}-certihuella"
+resource "aws_s3_bucket" "s3_bucket_certihuella" {
+  bucket = "${var.bucket_name}-certihuella"
   acl    = "private"
 
   server_side_encryption_configuration {
@@ -11,14 +11,27 @@
   }
 
 
-  tags = merge(
+  /*tags = merge(
     local.common_tags,
     {
       "Name"        = "${var.stack_id}-certihuella"
       "Environment" = var.stack_id
     },
-  )
-}*/
-// creacion manual bucket s3 para lambda
-//aws s3api create-bucket --bucket=mybucketjava --region=us-east-1
-//aws s3 cp .\build\distributions\lambda-client-validation-1.15-SNAPSHOT.zip s3://mybucketjava/lambda-client-validation-1.15-SNAPSHOT.zip
+  )*/
+}
+
+resource "aws_s3_bucket_object" "files" {
+ bucket = aws_s3_bucket.s3_bucket_certihuella.id
+ key    = "files/"
+}
+
+resource "aws_s3_bucket_notification" "s3_bucket_certihuella_in_notification" {
+ bucket = aws_s3_bucket.s3_bucket_certihuella.id
+ 
+ lambda_function {
+   lambda_function_arn = aws_lambda_function.lambda_process_file.arn
+   events              = ["s3:ObjectCreated:*"]
+   filter_prefix       = "files/"
+ }
+ depends_on = [aws_lambda_permission.allow_bucket]
+}
