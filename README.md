@@ -54,3 +54,60 @@ sam local invoke "lambdaProcessFile" --event test/s3-event.json --debug --profil
 #subir ejeuctable client validation
 aws s3 cp .\build\distributions\lambda-client-validation-1.15-SNAPSHOT.zip s3://vikingos-validate-client-repo/lambda-client-validation-1.15-SNAPSHOT.zip
 ```
+
+
+Cambios necesarios para el repo de infraestructura para agregar un nuevo bucket s3:
+
+1. Crear el bucket de operación
+En el archivo del enviroment/s3.tf
+```js
+resource "aws_s3_bucket" "s3_bucket_certihuella" {
+  bucket = "${var.stack_id}-certihuella"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
+  tags = merge(
+    local.common_tags,
+    {
+      "Name"        = "${var.stack_id}-fcertihuella"
+      "Environment" = var.stack_id
+    },
+  )
+}
+```
+2. Crear directorio dentro del bucket de entrada 
+```js
+resource "aws_s3_bucket_object" "s3_bank_landing_in_certihuella_object" {
+  key        = "celulas-adl/certihuella/" /*Se esta pendiente de la definición del nombre de esta ruta*/
+  bucket     = aws_s3_bucket.s3_bank_landing_in.id
+  acl        = "private"
+  source     = "/dev/null"
+  tags       = local.common_tags
+  depends_on = [aws_s3_bucket_object.s3_bank_landing_in_celulas_adl_object]
+}
+```
+
+3. Crear regla de replicación
+En el archivo _locals.tf_, se agrega a la lista de *bpop_s3_replication_configuration_items*
+```js
+{
+    rule_id                = "certihuella"
+    priority               = "2"
+    rule_prefix            = "celulas-adl/certihuella"
+    destination_account_id = var.certihuella_account_id
+    destination_bucket     = var.s3_bank_certihuella_in_arn /*arn del bucket creado*/
+}
+```
+Nota se deben crear las variables indicadas en el archivo _variables.tf_
+
